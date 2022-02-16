@@ -1,0 +1,34 @@
+/* night mode button */
+
+.night-mode {
+    position: relative;
+    border-radius: 1.5rem;
+    padding: .3rem;
+    width: 7vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #1b6a9b;
+}
+
+ion-icon {
+    color: white;
+}
+
+.day-icon {
+    font-size: 1.75rem;
+}
+
+.night-icon {
+    font-size: 1.5rem;
+}
+
+.mode-selector {
+    position: absolute;
+    background-color: #013662;
+    width: 4.2vw;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 1.5rem;
+}

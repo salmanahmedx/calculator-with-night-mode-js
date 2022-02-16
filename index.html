@@ -7,15 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/22fc2b7e1e.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <header>
         <nav>
             <div class="night-mode">
-                <div class="day"></div>
-                <div class="night"></div>
+                <div class="day">
+                    <div class="mode-selector"></div>
+                    <ion-icon name="sunny-outline" class="day-icon"></ion-icon>
+                </div>
+                <div class="night">
+                    <ion-icon name="moon-outline" class="night-icon"></ion-icon>
+                </div>
             </div>
         </nav>
     </header>
@@ -34,7 +38,8 @@
 
 
 
-
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="./script.js"></script>
 </body>
 
