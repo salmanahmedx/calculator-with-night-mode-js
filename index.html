@@ -10,19 +10,75 @@
 </head>
 
 <body>
-    <header>
-        <nav>
-            <div class="night-mode">
-                <div class="day">
-                    <div class="mode-selector"></div>
-                    <ion-icon name="sunny-outline" class="day-icon"></ion-icon>
+    <main>
+        <div class="calculator-container">
+
+            <!-- night mode button -->
+            <header>
+                <nav>
+                    <div class="night-mode">
+                        <div class="day">
+                            <div class="mode-selector"></div>
+                            <ion-icon name="sunny-outline" class="day-icon"></ion-icon>
+                        </div>
+                        <div class="night">
+                            <ion-icon name="moon-outline" class="night-icon"></ion-icon>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- calculation section -->
+
+                <div class="calculation-section">
+                    <h3 class="calculation-text">100+100+100</h3>
+                    <div class="calculation-solution">
+                        <h2>=</h2>
+                        <h2>500500</h2>
+                    </div>
                 </div>
-                <div class="night">
-                    <ion-icon name="moon-outline" class="night-icon"></ion-icon>
+            </header>
+
+            <!-- calculator buttons -->
+            <div class="buttons">
+                <div class="top-buttons">
+                    <h2 class="top-button">AC</h2>
+                    <h2 class="top-button">+/-</h2>
+                    <h2 class="top-button">%</h2>
+                </div>
+                <div class="number-buttons">
+                    <div class="group">
+                        <h2 class="number-button">1</h2>
+                        <h2 class="number-button">2</h2>
+                        <h2 class="number-button">3</h2>
+                    </div>
+                    <div class="group">
+                        <h2 class="number-button">4</h2>
+                        <h2 class="number-button">5</h2>
+                        <h2 class="number-button">6</h2>
+                    </div>
+                    <div class="group">
+                        <h2 class="number-button">7</h2>
+                        <h2 class="number-button">8</h2>
+                        <h2 class="number-button">9</h2>
+                    </div>
+
+                    <div class="group">
+                        <h2 class="number-button">.</h2>
+                        <h2 class="number-button">0</h2>
+                        <h2 class="number-button">00</h2>
+                    </div>
+
+                </div>
+                <div class="operator-button">
+                    <h2 class="operator">÷</h2>
+                    <h2 class="operator">*</h2>
+                    <h2 class="operator">-</h2>
+                    <h2 class="operator">+</h2>
+                    <h2 class="operator equal-operator">=</h2>
                 </div>
             </div>
-        </nav>
-    </header>
+        </div>
+    </main>
 
 
 
