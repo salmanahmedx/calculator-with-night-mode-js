@@ -14,8 +14,8 @@ body {
 
 .calculator-container {
     position: relative;
-    height: 55vh;
-    width: 30vw;
+    height: 525px;
+    width: 350px;
     padding: 3rem;
     border-radius: 2rem;
     background-color: #242527;
@@ -104,7 +104,7 @@ ion-icon {
     background: url(./Gradient-Background.png) center/cover;
     position: absolute;
     width: 100%;
-    max-height: 60%;
+    max-height: 75%;
     top: 50%;
     left: 0;
     border-radius: 1.5rem;
@@ -132,18 +132,20 @@ ion-icon {
     grid-area: a;
 }
 
-.number-buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
+.top-button {
+    cursor: pointer;
 }
 
-.group {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.number-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas:
+        "a b c"
+        "d e f"
+        "g h i"
+        "j k l"
+        gap: 1rem;
 }
 
 .number-button {
@@ -154,6 +156,7 @@ ion-icon {
     border-radius: 5rem;
     display: inline-block;
     width: 3.5rem;
+    cursor: pointer;
 }
 
 .operator-button {
@@ -173,6 +176,7 @@ ion-icon {
 
 .operator {
     padding: .5rem;
+    cursor: pointer;
 }
 
 .group-1 {
