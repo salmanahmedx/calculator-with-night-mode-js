@@ -29,6 +29,7 @@ const minus = document.querySelector(".minus")
 const equalOperator = document.querySelector(".equal-operator")
 
 let displayText = "";
+let displayTextNew = "";
 let calculationText = "";
 let calculation = null;
 let numberCalcultionText;
@@ -141,17 +142,6 @@ numberKeys.forEach(function (key) {
 //                         console.log(calculation)
 //                     }
 //                     break;
-//                 // case "minus":
-//                 //     calculationText = displayText;
-//                 //     displayText = ""
-//                 //     numberCalcultionText = Number(calculationText)
-//                 //     if (calculation === 0) {
-//                 //         calculation = numberCalcultionText - 0;
-//                 //     } else {
-//                 //         calculation = calculation - numberCalcultionText;
-//                 //         console.log(calculation)
-//                 //     }
-//                 //     break;
 
 //             }
 //         }
@@ -165,3 +155,36 @@ numberKeys.forEach(function (key) {
 //operator click --> symbol store in a variable --> new digit --> new symbol click --> precious symbol work start (( if its plus run this or if its sub run this)) -->>> create a loop --<< how the calculator works __ 123412 symbol 123131 symbol (previous calc done) --> in our current case bug -> press symbol -> old value and current value with current symbol. ignores the previous symbol
 
 //multiple click issue. if else caption once parameters?
+let containerOld = "";
+let sum = null;
+let containerNew = "";
+
+
+operatorBtn.forEach(function (operator) {
+    operator.addEventListener("click", function (operator) {
+        let operatorClasses = operator.target.classList;
+        for (const operatorClass of operatorClasses) {
+
+            if (operatorClass === "plus") {
+                if (containerOld === "") {
+                    containerOld = Number(displayText)
+                    displayText = ""
+                    console.log(containerOld)
+                } else {
+                    containerNew = Number(displayText);
+                    sum = containerOld + containerNew;
+                    containerOld = sum;
+                    displayText = ""
+                    console.log(containerOld)
+                }
+
+                // +
+                //  if (x = "") { x = 3441 } else { x + displayText; x = ""}
+
+            }
+            if (operatorClass === "equal-operator") {
+                console.log(calculation)
+            }
+        }
+    })
+})
