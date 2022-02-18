@@ -15,10 +15,24 @@ const multiply = document.querySelector(".divide")
 const plus = document.querySelector(".plus")
 const minus = document.querySelector(".minus")
 const equalOperator = document.querySelector(".equal-operator")
+const calculationText = document.querySelector(".calculation-text")
+const solutionText = document.querySelector(".solution-text")
+const displayEqualSign = document.querySelector(".display-equal-sign")
 let displayText = "";
 let displayTextNew = "";
-let calculationText = "";
 let numberCalcultionText;
+let containerOld = "";
+let sum = null;
+let substraction = null;
+let division = null;
+let multiplication = null;
+let containerNew = "";
+let previousClicked = "";
+let negativeValue = false;
+let calculationTextContent;
+allClearFunction()
+
+
 
 // top buttons
 
@@ -26,14 +40,10 @@ allClearBtn.addEventListener("click", allClearFunction)
 
 clearBtn.addEventListener("click", function (e) {
     displayText = displayText.slice(0, -1);
-    console.log(displayText.slice(0, -1))
+    calculationText.textContent = `${displayText}`
 })
 
-percentBtn.addEventListener("click", function (e) {
-    percent = Number(displayText) / 100;
-    //calculation text string % but calculation a calculated value
-    displayText = percent;
-})
+
 
 //number buttons
 
@@ -45,63 +55,52 @@ numberKeys.forEach(function (key) {
 
                 case "one":
                     displayText += 1;
-                    console.log(displayText)
+                    calculationText.textContent = displayText;
                     break;
 
                 case "two":
                     displayText += 2;
-                    console.log(displayText)
-                    break;
+                    calculationText.textContent = displayText; break;
 
                 case "three":
                     displayText += 3;
-                    console.log(displayText)
-                    break;
+                    calculationText.textContent = displayText; break;
 
                 case "four":
                     displayText += 4;
-                    console.log(displayText)
-                    break;
+                    calculationText.textContent = displayText; break;
 
                 case "five":
                     displayText += 5;
-                    console.log(displayText)
-                    break;
+                    calculationText.textContent = displayText; break;
 
                 case "six":
                     displayText += 6;
-                    console.log(displayText)
-                    break;
+                    calculationText.textContent = displayText; break;
 
                 case "seven":
                     displayText += 7;
-                    console.log(displayText)
-                    break;
+                    calculationText.textContent = displayText; break;
 
                 case "eight":
                     displayText += 8;
-                    console.log(displayText)
-                    break;
+                    calculationText.textContent = displayText; break;
 
                 case "nine":
                     displayText += 9;
-                    console.log(displayText)
-                    break;
+                    calculationText.textContent = displayText; break;
 
                 case "decimal-point":
                     if (displayText.slice(-1) !== ".") {
                         displayText += "."
                     }
-                    console.log(displayText)
-                    break;
+                    calculationText.textContent = displayText; break;
                 case "zero":
                     displayText += 0;
-                    console.log(displayText)
-                    break;
+                    calculationText.textContent = displayText; break;
                 case "double-zero":
                     displayText += "00";
-                    console.log(displayText)
-                    break;
+                    calculationText.textContent = displayText; break;
             }
 
         }
@@ -109,14 +108,7 @@ numberKeys.forEach(function (key) {
 })
 
 //multiple click issue. if else caption once parameters?
-let containerOld = "";
-let sum = null;
-let substraction = null;
-let division = null;
-let multiplication = null;
-let containerNew = "";
-let previousClicked = "";
-let negativeValue = false;
+
 
 
 operatorBtn.forEach(function (operator) {
@@ -124,9 +116,12 @@ operatorBtn.forEach(function (operator) {
         let operatorClasses = operator.target.classList;
 
         //* error handling
-        if (displayText.slice(-1) === ".") { console.log("syntax error") }
+        if (displayText.slice(-1) === ".") {
+            solutionText.textContent = "Syntax Error"
+        }
+
         if (displayText === "" && !operatorClasses.contains("minus")) {
-            console.log("invalid operation");
+            solutionText.textContent = "Invalid Command"
             allClearFunction()
         } else if (displayText === "" && operatorClasses.contains("minus")) {
             negativeValue = true;
@@ -138,53 +133,103 @@ operatorBtn.forEach(function (operator) {
                 displayText = -(displayText);
                 negativeValue = false;
             }
-            if (operatorClass === "plus") {
-                if (previousClicked === "") {
-                    previousClicked = "plus";
-                    containerOld = Number(displayText)
-                    displayText = "";
-                } else {
-                    previousClickedCheck(operatorClass)
+            if (previousClicked === "equal") {
+                allClearFunction()
+            } else {
+                if (operatorClass === "plus") {
+                    if (previousClicked === "") {
+                        previousClicked = "plus";
+                        containerOld = Number(displayText)
+                        if ((displayText.slice(0, 1) === "-")) {
+                            displayText = `(${displayText})`
+                        }
+                        calculationTextContent = displayText;
+                        calculationText.textContent = `${displayText} + `
+                        displayText = "";
+                    } else {
+                        previousClickedCheck(operatorClass)
+                        solutionText.textContent = `${containerOld}`;
+                    }
                 }
-            }
 
-            if (operatorClass === "minus") {
-                if (previousClicked === "") {
-                    previousClicked = "minus";
-                    containerOld = Number(displayText)
-                    displayText = "";
-                } else {
-                    previousClickedCheck(operatorClass)
+                if (operatorClass === "minus") {
+                    if (previousClicked === "") {
+                        previousClicked = "minus";
+                        containerOld = Number(displayText)
+                        if ((displayText.slice(0, 1) === "-")) {
+                            displayText = `(${displayText})`
+                        }
+                        calculationTextContent = displayText;
+                        calculationText.textContent = `${displayText} - `
+                        displayText = "";
+                    } else {
+                        previousClickedCheck(operatorClass)
+                        solutionText.textContent = `${containerOld}`;
+                    }
                 }
-            }
-            if (operatorClass === "divide") {
-                if (previousClicked === "") {
-                    previousClicked = "divide";
-                    containerOld = Number(displayText)
-                    displayText = "";
-                } else {
-                    previousClickedCheck(operatorClass)
+                if (operatorClass === "divide") {
+                    if (previousClicked === "") {
+                        previousClicked = "divide";
+                        containerOld = Number(displayText);
+                        if ((displayText.slice(0, 1) === "-")) {
+                            displayText = `(${displayText})`
+                        }
+                        calculationTextContent = displayText;
+                        calculationText.textContent = `${displayText} / `
+                        displayText = "";
+                    } else {
+                        previousClickedCheck(operatorClass)
+                        solutionText.textContent = `${containerOld}`;
+                    }
                 }
-            }
-            if (operatorClass === "multiply") {
-                if (previousClicked === "") {
-                    previousClicked = "multiply";
-                    containerOld = Number(displayText)
-                    displayText = "";
-                } else {
-                    previousClickedCheck(operatorClass)
+                if (operatorClass === "multiply") {
+                    if (previousClicked === "") {
+                        previousClicked = "multiply";
+                        containerOld = Number(displayText)
+                        if ((displayText.slice(0, 1) === "-")) {
+                            displayText = `(${displayText})`
+                        }
+                        calculationTextContent = displayText;
+                        calculationText.textContent = `${displayText} * `
+                        displayText = "";
+                    } else {
+                        previousClickedCheck(operatorClass)
+                        solutionText.textContent = `${containerOld}`;
+                    }
                 }
             }
             if (operatorClass === "equal-operator") {
-                if (previousClicked === "plus") { sumFunction() }
-                if (previousClicked === "minus") { minusFunction() }
-                if (previousClicked === "divide") { divideFunction() }
-                if (previousClicked === "multiply") { multiplyFunction() }
+                if (previousClicked === "") {
+                    solutionText.textContent = `${displayText}`;
+                } else {
+                    if (previousClicked === "plus") { sumFunction() }
+                    if (previousClicked === "minus") { minusFunction() }
+                    if (previousClicked === "divide") { divideFunction() }
+                    if (previousClicked === "multiply") { multiplyFunction() }
+                    solutionText.textContent = `${containerOld}`;
+                    previousClicked === "equal"
+                }
             }
+
+            if (solutionText.textContent !== "") {
+                displayEqualSign.textContent = "=";
+            } else {
+                displayEqualSign.textContent = "";
+            }
+
+
         }
     }
     )
 
+})
+
+
+percentBtn.addEventListener("click", function (e) {
+    percent = Number(displayText) / 100;
+    calculationText.textContent = `${displayText}%`
+    displayText = percent.toString();
+    console.log(displayText)
 })
 
 function allClearFunction() {
@@ -197,46 +242,45 @@ function allClearFunction() {
     previousClicked = "";
     displayText = "";
     displayTextNew = "";
-    calculationText = "";
     numberCalcultionText;
+    calculationText.textContent = ""
+    solutionText.textContent = ""
+    displayEqualSign.textContent = "";
 }
 
 function sumFunction() {
-    //* if the calculation just started
-    //* continued calculation
-
     containerNew = Number(displayText);
     sum = containerOld + containerNew;
+    calculationText.textContent = `${containerOld} + ${displayText}`
     containerOld = sum;
     displayText = ""
-    console.log(containerOld)
+
 }
 
 function minusFunction() {
-    // if (displayText === "") {
-    //** error handling // - comes before but if no number follows afterwards syntax error or else a - digit. +/- change to clear
-    // }
-
     containerNew = Number(displayText);
     substraction = containerOld - containerNew;
+    calculationText.textContent = `${containerOld} - (${displayText})`
     containerOld = substraction;
     displayText = ""
-    console.log(containerOld)
+
 }
 
 function divideFunction() {
     containerNew = Number(displayText);
     division = containerOld / containerNew;
+    calculationText.textContent = `${containerOld} / ${displayText}`
     containerOld = division;
     displayText = ""
-    console.log(containerOld)
+
 }
 function multiplyFunction() {
     containerNew = Number(displayText);
     multiplication = containerOld * containerNew;
+    calculationText.textContent = `${containerOld} * ${displayText}`
     containerOld = multiplication;
     displayText = ""
-    console.log(containerOld)
+
 }
 
 function previousClickedCheck(operatorClass) {

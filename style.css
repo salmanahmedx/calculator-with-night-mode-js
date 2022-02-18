@@ -7,12 +7,15 @@
 }
 
 body {
+    display: flex;
+    justify-content: center;
     padding: 3rem;
     height: 100vh;
     background: url(./Background-Image.jpg) center/cover no-repeat;
 }
 
 .calculator-container {
+    top: 10%;
     position: relative;
     height: 525px;
     width: 350px;
@@ -70,7 +73,7 @@ h2 {
     border-radius: 1.5rem;
     padding-top: .35rem;
     padding-bottom: .1rem;
-    width: 7vw;
+    width: 100px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -82,11 +85,11 @@ ion-icon {
 }
 
 .day-icon {
-    font-size: 1.25rem;
+    font-size: 25px;
 }
 
 .night-icon {
-    font-size: 1.05rem;
+    font-size: 20px;
 }
 
 .mode-selector {
