@@ -31,18 +31,22 @@ const equalOperator = document.querySelector(".equal-operator")
 let displayText = "";
 let displayTextNew = "";
 let calculationText = "";
-let calculation = null;
 let numberCalcultionText;
 
 // top buttons
 
 allClearBtn.addEventListener("click", function (e) {
-    displayText = "";
-    calculation = 0;
-    console.log(displayText);
     containerOld = "";
     sum = null;
+    substraction = null;
+    division = null;
+    multiplication = null;
     containerNew = "";
+    previousClicked = "";
+    displayText = "";
+    displayTextNew = "";
+    calculationText = "";
+    numberCalcultionText;
 })
 
 percentBtn.addEventListener("click", function (e) {
@@ -103,7 +107,9 @@ numberKeys.forEach(function (key) {
                     break;
 
                 case "decimal-point":
-                    if (displayText.slice(-1) !== ".") { displayText += "." } //bug fix if the last digit is decimal
+                    if (displayText.slice(-1) !== ".") {
+                        displayText += "."
+                    } //bug fix if the last digit is decimal
                     console.log(displayText)
                     break;
                 case "zero":
@@ -174,8 +180,12 @@ numberKeys.forEach(function (key) {
 let containerOld = "";
 let sum = null;
 let substraction = null;
+let division = null;
+let multiplication = null;
 let containerNew = "";
 let previousClicked = "";
+
+
 
 operatorBtn.forEach(function (operator) {
     operator.addEventListener("click", function (operator) {
@@ -183,23 +193,51 @@ operatorBtn.forEach(function (operator) {
         for (const operatorClass of operatorClasses) {
 
             if (operatorClass === "plus") {
-                previousClicked = "plus";
-                sumFunction();
+                if (previousClicked === "") {
+                    previousClicked = "plus";
+                    containerOld = Number(displayText)
+                    displayText = "";
+                } else {
+                    previousClickedCheck(operatorClass)
+
+                }
             }
 
             if (operatorClass === "minus") {
-                previousClicked = "minus"
-                minusFunction();
+                if (previousClicked === "") {
+                    previousClicked = "minus";
+                    containerOld = Number(displayText)
+                    displayText = "";
+                } else {
+                    previousClickedCheck(operatorClass)
+                }
             }
-
+            if (operatorClass === "divide") {
+                if (previousClicked === "") {
+                    previousClicked = "divide";
+                    containerOld = Number(displayText)
+                    displayText = "";
+                } else {
+                    previousClickedCheck(operatorClass)
+                }
+            }
+            if (operatorClass === "multiply") {
+                if (previousClicked === "") {
+                    previousClicked = "minus";
+                    containerOld = Number(displayText)
+                    displayText = "";
+                } else {
+                    previousClickedCheck(operatorClass)
+                }
+            }
 
 
 
             if (operatorClass === "equal-operator") {
                 if (previousClicked === "plus") { sumFunction() }
                 if (previousClicked === "minus") { minusFunction() }
-                // if (previousClicked === "divide") { divideFunction() }
-                // if (previousClicked === "multiply") { multiplyFunction() }
+                if (previousClicked === "divide") { divideFunction() }
+                if (previousClicked === "multiply") { multiplyFunction() }
             }
         }
     })
@@ -207,33 +245,54 @@ operatorBtn.forEach(function (operator) {
 
 function sumFunction() {
     //* if the calculation just started
-    if (containerOld === "") {
-        containerOld = Number(displayText)
-        displayText = ""
-        console.log(containerOld)
+    //* continued calculation
 
-    } else { //* continued calculation
-        containerNew = Number(displayText);
-        sum = containerOld + containerNew;
-        containerOld = sum;
-        displayText = ""
-        console.log(containerOld)
-    }
+    containerNew = Number(displayText);
+    sum = containerOld + containerNew;
+    containerOld = sum;
+    displayText = ""
+    console.log(containerOld)
 }
 
 function minusFunction() {
-    if (containerOld === "") {
-        // if (displayText === "") {
-        //** */ error handling // - comes before but if no number follows afterwards syntax error or else a - digit. +/- change to clear
-        // }
-        containerOld = Number(displayText);
-        displayText = ""
-        console.log(containerOld)
-    } else {
-        containerNew = Number(displayText);
-        substraction = containerOld - containerNew;
-        containerOld = substraction;
-        displayText = ""
-        console.log(containerOld)
+    // if (displayText === "") {
+    //** error handling // - comes before but if no number follows afterwards syntax error or else a - digit. +/- change to clear
+    // }
+
+    containerNew = Number(displayText);
+    substraction = containerOld - containerNew;
+    containerOld = substraction;
+    displayText = ""
+    console.log(containerOld)
+}
+
+function divideFunction() {
+    containerNew = Number(displayText);
+    division = containerOld / containerNew;
+    containerOld = division;
+    displayText = ""
+    console.log(containerOld)
+}
+function multiplyFunction() {
+    containerNew = Number(displayText);
+    multiplication = containerOld * containerNew;
+    containerOld = multiplication;
+    displayText = ""
+    console.log(containerOld)
+}
+
+function previousClickedCheck(operatorClass) {
+    if (previousClicked === "plus") {
+        sumFunction()
     }
+    if (previousClicked === "minus") {
+        minusFunction()
+    }
+    if (previousClicked === "divide") {
+        divideFunction()
+    }
+    if (previousClicked === "multiply") {
+        multiplyFunction()
+    }
+    previousClicked = operatorClass;
 }
