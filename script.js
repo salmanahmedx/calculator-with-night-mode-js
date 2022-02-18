@@ -40,6 +40,9 @@ allClearBtn.addEventListener("click", function (e) {
     displayText = "";
     calculation = 0;
     console.log(displayText);
+    containerOld = "";
+    sum = null;
+    containerNew = "";
 })
 
 percentBtn.addEventListener("click", function (e) {
@@ -96,6 +99,19 @@ numberKeys.forEach(function (key) {
 
                 case "nine":
                     displayText += 9;
+                    console.log(displayText)
+                    break;
+
+                case "decimal-point":
+                    if (displayText.slice(-1) !== ".") { displayText += "." } //bug fix if the last digit is decimal
+                    console.log(displayText)
+                    break;
+                case "zero":
+                    displayText += 0;
+                    console.log(displayText)
+                    break;
+                case "double-zero":
+                    displayText += "00";
                     console.log(displayText)
                     break;
             }
@@ -157,8 +173,9 @@ numberKeys.forEach(function (key) {
 //multiple click issue. if else caption once parameters?
 let containerOld = "";
 let sum = null;
+let substraction = null;
 let containerNew = "";
-
+let previousClicked = "";
 
 operatorBtn.forEach(function (operator) {
     operator.addEventListener("click", function (operator) {
@@ -166,25 +183,57 @@ operatorBtn.forEach(function (operator) {
         for (const operatorClass of operatorClasses) {
 
             if (operatorClass === "plus") {
-                if (containerOld === "") {
-                    containerOld = Number(displayText)
-                    displayText = ""
-                    console.log(containerOld)
-                } else {
-                    containerNew = Number(displayText);
-                    sum = containerOld + containerNew;
-                    containerOld = sum;
-                    displayText = ""
-                    console.log(containerOld)
-                }
-
-                // +
-                //  if (x = "") { x = 3441 } else { x + displayText; x = ""}
-
+                previousClicked = "plus";
+                sumFunction();
             }
+
+            if (operatorClass === "minus") {
+                previousClicked = "minus"
+                minusFunction();
+            }
+
+
+
+
             if (operatorClass === "equal-operator") {
-                console.log(calculation)
+                if (previousClicked === "plus") { sumFunction() }
+                if (previousClicked === "minus") { minusFunction() }
+                // if (previousClicked === "divide") { divideFunction() }
+                // if (previousClicked === "multiply") { multiplyFunction() }
             }
         }
     })
 })
+
+function sumFunction() {
+    //* if the calculation just started
+    if (containerOld === "") {
+        containerOld = Number(displayText)
+        displayText = ""
+        console.log(containerOld)
+
+    } else { //* continued calculation
+        containerNew = Number(displayText);
+        sum = containerOld + containerNew;
+        containerOld = sum;
+        displayText = ""
+        console.log(containerOld)
+    }
+}
+
+function minusFunction() {
+    if (containerOld === "") {
+        // if (displayText === "") {
+        //** */ error handling // - comes before but if no number follows afterwards syntax error or else a - digit. +/- change to clear
+        // }
+        containerOld = Number(displayText);
+        displayText = ""
+        console.log(containerOld)
+    } else {
+        containerNew = Number(displayText);
+        substraction = containerOld - containerNew;
+        containerOld = substraction;
+        displayText = ""
+        console.log(containerOld)
+    }
+}
