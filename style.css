@@ -16,9 +16,9 @@ body {
     position: relative;
     height: 525px;
     width: 350px;
-    padding: 3rem;
+    padding: 1.5rem 2rem 2rem 2rem;
     border-radius: 2rem;
-    background-color: #242527;
+    background-color: black;
     margin: 0 auto;
 }
 
@@ -68,7 +68,8 @@ h2 {
     margin: 0 auto;
     position: relative;
     border-radius: 1.5rem;
-    padding: .3rem;
+    padding-top: .35rem;
+    padding-bottom: .1rem;
     width: 7vw;
     display: flex;
     justify-content: space-around;
@@ -81,11 +82,11 @@ ion-icon {
 }
 
 .day-icon {
-    font-size: 1.75rem;
+    font-size: 1.25rem;
 }
 
 .night-icon {
-    font-size: 1.5rem;
+    font-size: 1.05rem;
 }
 
 .mode-selector {

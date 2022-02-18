@@ -5,29 +5,16 @@
 
 //// Number keys selection
 
-const allClearBtn = document.querySelector(".clear-btn")
-const negativeNumBtn = document.querySelector(".negative-num-btn")
+const allClearBtn = document.querySelector(".all-clear-btn")
+const clearBtn = document.querySelector(".clear-btn")
 const percentBtn = document.querySelector(".percent-btn")
 const numberKeys = document.querySelectorAll(".number-button")
 const operatorBtn = document.querySelectorAll(".operator")
-// const one = document.querySelector(".one")
-// const two = document.querySelector(".two")
-// const three = document.querySelector(".three")
-// const four = document.querySelector(".four")
-// const five = document.querySelector(".five")
-// const six = document.querySelector(".six")
-// const seven = document.querySelector(".seven")
-// const eight = document.querySelector(".eight")
-// const nine = document.querySelector(".nine")
-// const zero = document.querySelector(".zero")
-// const decimalPoint = document.querySelector(".decimal-point")
-// const doubleZero = document.querySelector(".double-zero")
 const divide = document.querySelector(".divide")
 const multiply = document.querySelector(".divide")
 const plus = document.querySelector(".plus")
 const minus = document.querySelector(".minus")
 const equalOperator = document.querySelector(".equal-operator")
-
 let displayText = "";
 let displayTextNew = "";
 let calculationText = "";
@@ -35,22 +22,17 @@ let numberCalcultionText;
 
 // top buttons
 
-allClearBtn.addEventListener("click", function (e) {
-    containerOld = "";
-    sum = null;
-    substraction = null;
-    division = null;
-    multiplication = null;
-    containerNew = "";
-    previousClicked = "";
-    displayText = "";
-    displayTextNew = "";
-    calculationText = "";
-    numberCalcultionText;
+allClearBtn.addEventListener("click", allClearFunction)
+
+clearBtn.addEventListener("click", function (e) {
+    displayText = displayText.slice(0, -1);
+    console.log(displayText.slice(0, -1))
 })
 
 percentBtn.addEventListener("click", function (e) {
-    console.log('percent')
+    percent = Number(displayText) / 100;
+    //calculation text string % but calculation a calculated value
+    displayText = percent;
 })
 
 //number buttons
@@ -109,7 +91,7 @@ numberKeys.forEach(function (key) {
                 case "decimal-point":
                     if (displayText.slice(-1) !== ".") {
                         displayText += "."
-                    } //bug fix if the last digit is decimal
+                    }
                     console.log(displayText)
                     break;
                 case "zero":
@@ -126,56 +108,6 @@ numberKeys.forEach(function (key) {
     })
 })
 
-//operator buttons
-
-// operatorBtn.forEach(function (operator) {
-//     operator.addEventListener("click", function (operator) {
-//         let operatorClasses = operator.target.classList;
-//         for (const operatorClass of operatorClasses) {
-//             switch (operatorClass) {
-//                 case "plus":
-//                     calculationText = displayText;
-//                     displayText = "";
-//                     numberCalcultionText = Number(calculationText)
-//                     calculation += numberCalcultionText;
-//                     console.log(calculation)
-//                     break;
-//                 case "minus":
-//                     calculationText = displayText;
-//                     displayText = ""
-//                     numberCalcultionText = Number(calculationText)
-//                     if (calculation === null) {
-//                         calculation = numberCalcultionText - 0;
-//                     } else {
-//                         calculation = calculation - numberCalcultionText;
-//                         console.log(calculation)
-//                     }
-//                     break;
-//                 case "multiply":
-//                     calculationText = displayText;
-//                     displayText = ""
-//                     numberCalcultionText = Number(calculationText)
-//                     if (calculation === null) {
-//                         calculation = numberCalcultionText;
-//                         console.log(calculation)
-//                     }
-//                     else if (calculation !== null) {
-//                         calculation = calculation * numberCalcultionText;
-//                         console.log(calculation)
-//                     }
-//                     break;
-
-//             }
-//         }
-//     })
-// })
-
-// +/- symbol
-
-//try if-else instead of switch in operator
-
-//operator click --> symbol store in a variable --> new digit --> new symbol click --> precious symbol work start (( if its plus run this or if its sub run this)) -->>> create a loop --<< how the calculator works __ 123412 symbol 123131 symbol (previous calc done) --> in our current case bug -> press symbol -> old value and current value with current symbol. ignores the previous symbol
-
 //multiple click issue. if else caption once parameters?
 let containerOld = "";
 let sum = null;
@@ -184,14 +116,28 @@ let division = null;
 let multiplication = null;
 let containerNew = "";
 let previousClicked = "";
-
+let negativeValue = false;
 
 
 operatorBtn.forEach(function (operator) {
     operator.addEventListener("click", function (operator) {
         let operatorClasses = operator.target.classList;
-        for (const operatorClass of operatorClasses) {
 
+        //* error handling
+        if (displayText.slice(-1) === ".") { console.log("syntax error") }
+        if (displayText === "" && !operatorClasses.contains("minus")) {
+            console.log("invalid operation");
+            allClearFunction()
+        } else if (displayText === "" && operatorClasses.contains("minus")) {
+            negativeValue = true;
+            return;
+        }
+
+        for (const operatorClass of operatorClasses) {
+            if (negativeValue) {
+                displayText = -(displayText);
+                negativeValue = false;
+            }
             if (operatorClass === "plus") {
                 if (previousClicked === "") {
                     previousClicked = "plus";
@@ -199,7 +145,6 @@ operatorBtn.forEach(function (operator) {
                     displayText = "";
                 } else {
                     previousClickedCheck(operatorClass)
-
                 }
             }
 
@@ -223,16 +168,13 @@ operatorBtn.forEach(function (operator) {
             }
             if (operatorClass === "multiply") {
                 if (previousClicked === "") {
-                    previousClicked = "minus";
+                    previousClicked = "multiply";
                     containerOld = Number(displayText)
                     displayText = "";
                 } else {
                     previousClickedCheck(operatorClass)
                 }
             }
-
-
-
             if (operatorClass === "equal-operator") {
                 if (previousClicked === "plus") { sumFunction() }
                 if (previousClicked === "minus") { minusFunction() }
@@ -240,8 +182,24 @@ operatorBtn.forEach(function (operator) {
                 if (previousClicked === "multiply") { multiplyFunction() }
             }
         }
-    })
+    }
+    )
+
 })
+
+function allClearFunction() {
+    containerOld = "";
+    sum = null;
+    substraction = null;
+    division = null;
+    multiplication = null;
+    containerNew = "";
+    previousClicked = "";
+    displayText = "";
+    displayTextNew = "";
+    calculationText = "";
+    numberCalcultionText;
+}
 
 function sumFunction() {
     //* if the calculation just started
