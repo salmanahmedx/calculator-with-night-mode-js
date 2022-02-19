@@ -93,8 +93,8 @@ numberKeys.forEach(function (key) {
                 case "decimal-point":
                     if (displayText.slice(-1) !== ".") {
                         displayText += "."
+                        calculationText.textContent = displayText; break;
                     }
-                    calculationText.textContent = displayText; break;
                 case "zero":
                     displayText += 0;
                     calculationText.textContent = displayText; break;
@@ -148,7 +148,7 @@ operatorBtn.forEach(function (operator) {
                         displayText = "";
                     } else {
                         previousClickedCheck(operatorClass)
-                        solutionText.textContent = `${containerOld}`;
+                        formatSolutionText(containerOld)
                     }
                 }
 
@@ -164,7 +164,7 @@ operatorBtn.forEach(function (operator) {
                         displayText = "";
                     } else {
                         previousClickedCheck(operatorClass)
-                        solutionText.textContent = `${containerOld}`;
+                        formatSolutionText(containerOld)
                     }
                 }
                 if (operatorClass === "divide") {
@@ -179,7 +179,7 @@ operatorBtn.forEach(function (operator) {
                         displayText = "";
                     } else {
                         previousClickedCheck(operatorClass)
-                        solutionText.textContent = `${containerOld}`;
+                        formatSolutionText(containerOld)
                     }
                 }
                 if (operatorClass === "multiply") {
@@ -194,7 +194,7 @@ operatorBtn.forEach(function (operator) {
                         displayText = "";
                     } else {
                         previousClickedCheck(operatorClass)
-                        solutionText.textContent = `${containerOld}`;
+                        formatSolutionText(containerOld)
                     }
                 }
             }
@@ -206,7 +206,7 @@ operatorBtn.forEach(function (operator) {
                     if (previousClicked === "minus") { minusFunction() }
                     if (previousClicked === "divide") { divideFunction() }
                     if (previousClicked === "multiply") { multiplyFunction() }
-                    solutionText.textContent = `${containerOld}`;
+                    formatSolutionText(containerOld)
                     previousClicked === "equal"
                 }
             }
@@ -216,8 +216,6 @@ operatorBtn.forEach(function (operator) {
             } else {
                 displayEqualSign.textContent = "";
             }
-
-
         }
     }
     )
@@ -281,6 +279,14 @@ function multiplyFunction() {
     containerOld = multiplication;
     displayText = ""
 
+}
+
+function formatSolutionText(containerOld) {
+    if (containerOld.toString().includes(".")) {
+        solutionText.textContent = `${containerOld.toFixed(2)}`;
+    } else {
+        solutionText.textContent = `${containerOld}`
+    }
 }
 
 function previousClickedCheck(operatorClass) {
