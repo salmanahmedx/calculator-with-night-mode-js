@@ -1,4 +1,6 @@
 /* global styles */
+@import url('https://fonts.googleapis.com/css2?family=Karma:wght@500&display=swap');
+
 
 * {
     box-sizing: border-box;
@@ -11,14 +13,16 @@ body {
     justify-content: center;
     padding: 3rem;
     height: 100vh;
-    background: url(./Background-Image.jpg) center/cover no-repeat;
+    background: url(./solid-navy-blue-concrete-textured-wall.jpg) center/cover no-repeat;
+    font-family: 'Karma',
+        serif;
 }
 
 .calculator-container {
     top: 10%;
     position: relative;
     height: 525px;
-    width: 350px;
+    width: 320px;
     padding: 1.5rem 2rem 2rem 2rem;
     border-radius: 2rem;
     background-color: black;
@@ -33,7 +37,7 @@ header {
 }
 
 h2 {
-    font-size: 1.75rem;
+    font-size: 1.7rem;
     color: white;
 }
 
@@ -50,7 +54,8 @@ h2 {
 }
 
 .calculation-text {
-    color: #6b6e72;
+    color: #082738;
+    opacity: .5;
     font-size: 1.25rem;
     align-self: flex-end;
     padding-bottom: .75rem
@@ -73,6 +78,7 @@ h2 {
     border-radius: 1.5rem;
     padding-top: .35rem;
     padding-bottom: .1rem;
+    height: 40px;
     width: 100px;
     display: flex;
     justify-content: space-around;
@@ -85,11 +91,13 @@ ion-icon {
 }
 
 .day-icon {
-    font-size: 25px;
+    font-size: 24px;
+    padding-top: 3px;
 }
 
 .night-icon {
     font-size: 20px;
+    padding-top: .85px;
 }
 
 .mode-selector {
@@ -98,7 +106,9 @@ ion-icon {
     width: 55%;
     height: 100%;
     top: 0;
-    left: 0;
+    /* day mode : left: 0; */
+    /* night mode : left: 47%*/
+    left: 47%;
     border-radius: 1.5rem;
 }
 
@@ -111,8 +121,10 @@ ion-icon {
     max-height: 75%;
     top: 50%;
     left: 0;
-    border-radius: 1.5rem;
-    padding: 3rem;
+    border-radius: .3rem;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    padding: 1.8rem 3rem 3rem 3rem;
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(2, 1fr);
@@ -126,18 +138,38 @@ ion-icon {
     gap: 1rem;
 }
 
+.day-theme .buttons {
+    background: url(./Background-Image.jpg) center/cover;
+}
+
 .top-buttons {
     width: 100%;
     background-color: #082738;
     display: flex;
     justify-content: space-between;
-    padding: .5rem;
+    padding: .5rem .5rem .2rem .5rem;
     border-radius: 5rem;
     grid-area: a;
 }
 
+.day-theme .top-buttons,
+.day-theme .number-button,
+.day-theme .operator-button {
+    background-color: #73e4e2;
+}
+
+.day-theme h2 {
+    color: #082738;
+}
+
+.day-theme .calculator-container {
+    background-color: #cdfffe;
+}
+
 .top-button {
     cursor: pointer;
+    padding-left: 8.5px;
+    padding-right: 12.5px;
 }
 
 .number-buttons {
@@ -148,15 +180,15 @@ ion-icon {
         "a b c"
         "d e f"
         "g h i"
-        "j k l"
-        gap: 1rem;
+        "j k l";
+    gap: .6rem;
 }
 
 .number-button {
-    margin: .25rem;
+    margin: .2rem;
     text-align: center;
     background: #082738;
-    padding: .7rem;
+    padding: .45rem;
     border-radius: 5rem;
     display: inline-block;
     width: 3.5rem;

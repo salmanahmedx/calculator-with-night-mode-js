@@ -304,3 +304,20 @@ function previousClickedCheck(operatorClass) {
     }
     previousClicked = operatorClass;
 }
+
+//* Dark Mode and Light Mode
+
+const modeSelector = document.querySelector(".mode-selector")
+const dayIcon = document.querySelector(".day")
+const nightIcon = document.querySelector(".night")
+const main = document.querySelector(".main")
+
+dayIcon.addEventListener("click", function () {
+    modeSelector.style.left = "0"
+    main.classList.toggle("day-theme")
+
+})
+nightIcon.addEventListener("click", function () {
+    modeSelector.style.left = "47%"
+    main.classList.toggle("day-theme")
+})
