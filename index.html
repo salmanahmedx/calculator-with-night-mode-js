@@ -11,60 +11,62 @@
 
 <body>
     <main class="main">
-        <div class="calculator-container">
+        <div class="container">
+            <div class="calculator-container">
 
-            <!-- night mode button -->
-            <header>
-                <nav>
-                    <div class="night-mode">
-                        <div class="mode-selector"></div>
-                        <div class="day">
-                            <ion-icon name="sunny-outline" class="day-icon"></ion-icon>
+                <!-- night mode button -->
+                <header>
+                    <nav>
+                        <div class="night-mode">
+                            <div class="mode-selector"></div>
+                            <div class="day">
+                                <ion-icon name="sunny-outline" class="day-icon"></ion-icon>
+                            </div>
+                            <div class="night">
+                                <ion-icon name="moon-outline" class="night-icon"></ion-icon>
+                            </div>
                         </div>
-                        <div class="night">
-                            <ion-icon name="moon-outline" class="night-icon"></ion-icon>
+                    </nav>
+
+                    <!-- calculation section -->
+
+                    <div class="calculation-section">
+                        <h3 class="calculation-text">100+100+100</h3>
+                        <div class="calculation-solution">
+                            <h2 class="display-equal-sign"></h2>
+                            <h2 class="solution-text">500500</h2>
                         </div>
                     </div>
-                </nav>
+                </header>
 
-                <!-- calculation section -->
-
-                <div class="calculation-section">
-                    <h3 class="calculation-text">100+100+100</h3>
-                    <div class="calculation-solution">
-                        <h2 class="display-equal-sign"></h2>
-                        <h2 class="solution-text">500500</h2>
+                <!-- calculator buttons -->
+                <div class="buttons">
+                    <div class="top-buttons">
+                        <h2 class="top-button all-clear-btn">AC</h2>
+                        <h2 class="top-button clear-btn">C</h2>
+                        <h2 class="top-button percent-btn">%</h2>
                     </div>
-                </div>
-            </header>
-
-            <!-- calculator buttons -->
-            <div class="buttons">
-                <div class="top-buttons">
-                    <h2 class="top-button all-clear-btn">AC</h2>
-                    <h2 class="top-button clear-btn">C</h2>
-                    <h2 class="top-button percent-btn">%</h2>
-                </div>
-                <div class="number-buttons">
-                    <h2 class="number-button one">1</h2>
-                    <h2 class="number-button two">2</h2>
-                    <h2 class="number-button three">3</h2>
-                    <h2 class="number-button four">4</h2>
-                    <h2 class="number-button five">5</h2>
-                    <h2 class="number-button six">6</h2>
-                    <h2 class="number-button seven">7</h2>
-                    <h2 class="number-button eight">8</h2>
-                    <h2 class="number-button nine">9</h2>
-                    <h2 class="number-button decimal-point">.</h2>
-                    <h2 class="number-button zero">0</h2>
-                    <h2 class="number-button double-zero">00</h2>
-                </div>
-                <div class="operator-button">
-                    <h2 class="operator divide">÷</h2>
-                    <h2 class="operator multiply">*</h2>
-                    <h2 class="operator minus">-</h2>
-                    <h2 class="operator plus">+</h2>
-                    <h2 class="operator equal-operator">=</h2>
+                    <div class="number-buttons">
+                        <h2 class="number-button one">1</h2>
+                        <h2 class="number-button two">2</h2>
+                        <h2 class="number-button three">3</h2>
+                        <h2 class="number-button four">4</h2>
+                        <h2 class="number-button five">5</h2>
+                        <h2 class="number-button six">6</h2>
+                        <h2 class="number-button seven">7</h2>
+                        <h2 class="number-button eight">8</h2>
+                        <h2 class="number-button nine">9</h2>
+                        <h2 class="number-button decimal-point">.</h2>
+                        <h2 class="number-button zero">0</h2>
+                        <h2 class="number-button double-zero">00</h2>
+                    </div>
+                    <div class="operator-button">
+                        <h2 class="operator divide">÷</h2>
+                        <h2 class="operator multiply">*</h2>
+                        <h2 class="operator minus">-</h2>
+                        <h2 class="operator plus">+</h2>
+                        <h2 class="operator equal-operator">=</h2>
+                    </div>
                 </div>
             </div>
         </div>
